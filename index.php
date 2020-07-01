@@ -1,11 +1,10 @@
 <?php 
 
     $active='Home';
-	
-	echo "hello !!!";
+    include("includes/header.php");
 
 ?>
-
+   
    <div class="container" id="slider"><!-- container Begin -->
        
        <div class="col-md-12"><!-- col-md-12 Begin -->
@@ -23,7 +22,51 @@
                
                <div class="carousel-inner"><!-- carousel-inner Begin -->
 
-               
+               <?php 
+                   
+                   $get_slides = "select * from slider LIMIT 0,1";
+                   
+                   $run_slides = mysqli_query($con,$get_slides);
+                   
+                   while($row_slides = mysqli_fetch_array($run_slides)){
+                       
+                       $slide_name = $row_slides['slide_name'];
+                       $slide_image = $row_slides['slide_image'];
+                       
+                       echo "
+                       
+                       <div class='item active'>
+                       
+                            <img style='margin: auto;' src='admin_area/slides_images/$slide_image'>
+                       
+                       </div>
+                       
+                       ";
+                       
+                   }
+                   
+                   $get_slides = "select * from slider LIMIT 1,3";
+                   
+                   $run_slides = mysqli_query($con,$get_slides);
+                   
+                   while($row_slides=mysqli_fetch_array($run_slides)){
+                       
+                       $slide_name = $row_slides['slide_name'];
+                       $slide_image = $row_slides['slide_image'];
+                       
+                       echo "
+                       
+                       <div class='item'>
+                       
+                       <img style='margin: auto;' style src='admin_area/slides_images/$slide_image'>
+                       
+                       </div>
+                       
+                       ";
+                       
+                   }
+                   
+                   ?>
                    
                </div><!-- carousel-inner Finish -->
                
@@ -137,13 +180,17 @@
        
        <div class="row"><!-- row Begin -->
 
-
+       <?php 
+            getpro();
+       ?>
            
        </div><!-- row Finish -->
        
    </div><!-- container Finish -->
 
-
+   <?php
+        include("includes/footer.php");
+   ?>
     
     <script src="js/jquery-331.min.js"></script>
     <script src="js/bootstrap-337.min.js"></script>
